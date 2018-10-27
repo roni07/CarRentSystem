@@ -12,13 +12,13 @@ import com.vaadin.ui.themes.ValoTheme;
 @Theme("valo")
 @SpringUI
 @PushStateNavigation
-public class MainUI extends UI{
+public class MainUI extends UI {
 
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
 
-       Label menuLabel = new Label("Menu");
+        Label menuLabel = new Label("Menu");
         menuLabel.addStyleName(ValoTheme.MENU_TITLE);
 
         Button homeButton = new Button("Home", e -> getNavigator().
@@ -31,23 +31,21 @@ public class MainUI extends UI{
         registrationView.addStyleNames(ValoTheme.BUTTON_LINK, ValoTheme.MENU_ITEM);
 
 
-
-        VerticalLayout menu = new VerticalLayout(menuLabel, homeButton, registrationView);
+        CssLayout menu = new CssLayout(menuLabel, homeButton, registrationView);
         menu.addStyleName(ValoTheme.MENU_ROOT);
         menu.setSizeFull();
 
-        CssLayout viewContainer = new CssLayout();
-        viewContainer.setSizeFull();
-        viewContainer.setHeightUndefined();
+        VerticalLayout viewContainer = new VerticalLayout();
+        viewContainer.setMargin(false);
+
 
         HorizontalLayout mainLayout = new HorizontalLayout();
         mainLayout.addComponent(menu);
         mainLayout.addComponentsAndExpand(viewContainer);
-        setContent(mainLayout);
 
-        mainLayout.setSizeFull();
-        mainLayout.setSpacing(true);
-        mainLayout.setWidthUndefined();
+        mainLayout.setExpandRatio(menu, .1f);
+
+        setContent(mainLayout);
 
         LoginView loginView = new LoginView();
         HomeView homeView = new HomeView();
